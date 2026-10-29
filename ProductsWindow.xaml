@@ -1,0 +1,146 @@
+<Window x:Class="WarehousePro.Wpf.ProductsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Товары и остатки"
+        Width="1200"
+        Height="760"
+        MinWidth="900"
+        MinHeight="560"
+        WindowStartupLocation="CenterOwner"
+        Background="{DynamicResource BgMain}"
+        WindowStyle="None"
+        ResizeMode="CanResize">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Margin="0,0,0,18" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+            <TextBlock x:Name="titleText" Text="Товары и остатки" FontSize="28" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}" VerticalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Button x:Name="MinimizeButton" Style="{StaticResource CloseButtonStyle}" Content="–" Click="MinimizeButton_Click" ToolTip="Свернуть"/>
+                <Button x:Name="MaximizeButton" Style="{StaticResource CloseButtonStyle}" Content="☐" Click="MaximizeButton_Click" ToolTip="На весь экран"/>
+                <Button x:Name="CloseButton" Style="{StaticResource CloseButtonStyle}" Content="✕" Click="CloseButton_Click" ToolTip="Закрыть"/>
+            </StackPanel>
+        </Grid>
+
+        <Border Grid.Row="1" Style="{StaticResource CardStyle}" Padding="18">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="txtSearch" Height="42" Style="{StaticResource InputStyle}" FontSize="15" TextChanged="TxtSearch_TextChanged"/>
+                <Button x:Name="RefreshButton" Grid.Column="1" Width="120" Height="42" Margin="12,0,0,0" Content="Обновить" Click="BtnRefresh_Click" Style="{StaticResource PrimaryButtonStyle}"/>
+                <Button x:Name="newButton" Grid.Column="2" Width="120" Height="42" Margin="12,0,0,0" Content="Новый" Click="BtnNew_Click" Style="{StaticResource PrimaryButtonStyle}"/>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="2" Margin="0,18,0,0" Style="{StaticResource CardStyle}" Padding="18">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Margin="0,0,10,0">
+                    <TextBlock x:Name="labelName" Text="Название" Foreground="{DynamicResource TextSecondary}" FontSize="12" Margin="0,0,0,6"/>
+                    <TextBox x:Name="txtName" Height="38" Style="{StaticResource InputStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin="0,0,10,0">
+                    <TextBlock x:Name="labelArticle" Text="Артикул" Foreground="{DynamicResource TextSecondary}" FontSize="12" Margin="0,0,0,6"/>
+                    <TextBox x:Name="txtArticle" Height="38" Style="{StaticResource InputStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Margin="0,0,10,0">
+                    <TextBlock x:Name="labelCategory" Text="Категория" Foreground="{DynamicResource TextSecondary}" FontSize="12" Margin="0,0,0,6"/>
+                    <TextBox x:Name="txtCategory" Height="38" Style="{StaticResource InputStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="3" Margin="0,0,10,0">
+                    <TextBlock x:Name="labelKind" Text="Вид" Foreground="{DynamicResource TextSecondary}" FontSize="12" Margin="0,0,0,6"/>
+                    <TextBox x:Name="txtKind" Height="38" Style="{StaticResource InputStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="4" Margin="0,0,10,0">
+                    <TextBlock x:Name="labelColor" Text="Цвет" Foreground="{DynamicResource TextSecondary}" FontSize="12" Margin="0,0,0,6"/>
+                    <TextBox x:Name="txtColor" Height="38" Style="{StaticResource InputStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="5" VerticalAlignment="Bottom">
+                    <Button x:Name="saveButton" Content="Сохранить" Height="38" Style="{StaticResource SuccessButtonStyle}" Click="BtnSave_Click"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Margin="0,10,10,0">
+                    <TextBlock x:Name="labelManufacturer" Text="Производитель" Foreground="{DynamicResource TextSecondary}" FontSize="12" Margin="0,0,0,6"/>
+                    <TextBox x:Name="txtManufacturer" Height="38" Style="{StaticResource InputStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,10,10,0">
+                    <TextBlock x:Name="labelMaterial" Text="Материал" Foreground="{DynamicResource TextSecondary}" FontSize="12" Margin="0,0,0,6"/>
+                    <TextBox x:Name="txtMaterial" Height="38" Style="{StaticResource InputStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="2" Margin="0,10,10,0">
+                    <TextBlock x:Name="labelUnit" Text="Ед. изм." Foreground="{DynamicResource TextSecondary}" FontSize="12" Margin="0,0,0,6"/>
+                    <TextBox x:Name="txtUnit" Height="38" Style="{StaticResource InputStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="3" Margin="0,10,10,0">
+                    <TextBlock x:Name="labelQuantity" Text="Остаток" Foreground="{DynamicResource TextSecondary}" FontSize="12" Margin="0,0,0,6"/>
+                    <TextBox x:Name="txtQuantity" Height="38" Style="{StaticResource InputStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="4" Margin="0,10,10,0">
+                    <TextBlock x:Name="labelMinimum" Text="Минимум" Foreground="{DynamicResource TextSecondary}" FontSize="12" Margin="0,0,0,6"/>
+                    <TextBox x:Name="txtMinimumStock" Height="38" Style="{StaticResource InputStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="5" VerticalAlignment="Bottom" Margin="0,10,0,0">
+                    <Button x:Name="deleteButton" Content="Удалить" Height="38" Style="{StaticResource DangerButtonStyle}" Click="BtnDelete_Click"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Margin="0,10,10,0">
+                    <TextBlock x:Name="labelPurchasePrice" Text="Цена закупки" Foreground="{DynamicResource TextSecondary}" FontSize="12" Margin="0,0,0,6"/>
+                    <TextBox x:Name="txtPurchasePrice" Height="38" Style="{StaticResource InputStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Grid.Column="1" Margin="0,10,10,0">
+                    <TextBlock x:Name="labelSalePrice" Text="Цена продажи" Foreground="{DynamicResource TextSecondary}" FontSize="12" Margin="0,0,0,6"/>
+                    <TextBox x:Name="txtSalePrice" Height="38" Style="{StaticResource InputStyle}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="3" Margin="0,18,0,0" Padding="10" CornerRadius="18" Background="{DynamicResource BgPanel}" BorderBrush="{DynamicResource BorderSoft}" BorderThickness="1">
+            <DataGrid x:Name="dgProducts"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      IsReadOnly="True"
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                      SelectionMode="Single"
+                      SelectionUnit="FullRow"
+                      FontSize="13"
+                      SelectionChanged="DgProducts_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="colName" Header="Название" Binding="{Binding Name}" Width="*" MinWidth="180"/>
+                    <DataGridTextColumn x:Name="colArticle" Header="Артикул" Binding="{Binding Article}" Width="100"/>
+                    <DataGridTextColumn x:Name="colCategory" Header="Категория" Binding="{Binding Category}" Width="100"/>
+                    <DataGridTextColumn x:Name="colKind" Header="Вид" Binding="{Binding Kind}" Width="110"/>
+                    <DataGridTextColumn x:Name="colColor" Header="Цвет" Binding="{Binding Color}" Width="90"/>
+                    <DataGridTextColumn x:Name="colManufacturer" Header="Производитель" Binding="{Binding Manufacturer}" Width="120"/>
+                    <DataGridTextColumn x:Name="colMaterial" Header="Материал" Binding="{Binding Material}" Width="100"/>
+                    <DataGridTextColumn x:Name="colUnit" Header="Ед." Binding="{Binding Unit}" Width="55"/>
+                    <DataGridTextColumn x:Name="colPurchasePrice" Header="Цена закупки" Binding="{Binding PurchasePrice, StringFormat={}{0:N2}}" Width="110"/>
+                    <DataGridTextColumn x:Name="colSalePrice" Header="Цена продажи" Binding="{Binding SalePrice, StringFormat={}{0:N2}}" Width="110"/>
+                    <DataGridTextColumn x:Name="colQuantity" Header="Остаток" Binding="{Binding Quantity}" Width="80"/>
+                    <DataGridTextColumn x:Name="colMinimum" Header="Минимум" Binding="{Binding MinimumStock}" Width="80"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+    </Grid>
+</Window>

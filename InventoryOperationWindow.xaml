@@ -1,0 +1,46 @@
+<Window x:Class="WarehousePro.Wpf.InventoryOperationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Операция"
+        Width="520"
+        Height="460"
+        WindowStartupLocation="CenterOwner"
+        Background="{DynamicResource BgMain}"
+        WindowStyle="None"
+        ResizeMode="CanResize">
+    <Grid Margin="22">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,0,0,18" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+            <TextBlock x:Name="titleText" Text="Операция" FontSize="26" FontWeight="Bold" Foreground="{DynamicResource TextPrimary}" VerticalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Button x:Name="MinimizeButton" Style="{StaticResource CloseButtonStyle}" Content="–" Click="MinimizeButton_Click" ToolTip="Свернуть"/>
+                <Button x:Name="MaximizeButton" Style="{StaticResource CloseButtonStyle}" Content="☐" Click="MaximizeButton_Click" ToolTip="На весь экран"/>
+                <Button x:Name="CloseButton" Style="{StaticResource CloseButtonStyle}" Content="✕" Click="CloseButton_Click" ToolTip="Закрыть"/>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Row="1" Margin="0,0,0,12">
+            <TextBlock x:Name="productLabel" Text="Товар" Foreground="{DynamicResource TextSecondary}" FontSize="12" Margin="0,0,0,6"/>
+            <ComboBox x:Name="cmbProducts" Style="{StaticResource ThemedComboBox}" MaxDropDownHeight="170" SelectedValuePath="Id"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Margin="0,0,0,12">
+            <TextBlock x:Name="quantityLabel" Text="Количество" Foreground="{DynamicResource TextSecondary}" FontSize="12" Margin="0,0,0,6"/>
+            <TextBox x:Name="txtQuantity" Height="42" Style="{StaticResource InputStyle}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Margin="0,0,0,18" x:Name="directionPanel" Visibility="Collapsed">
+            <TextBlock x:Name="directionLabel" Text="Тип возврата" Foreground="{DynamicResource TextSecondary}" FontSize="12" Margin="0,0,0,6"/>
+            <ComboBox x:Name="cmbDirection" Style="{StaticResource ThemedComboBox}" MaxDropDownHeight="120"/>
+        </StackPanel>
+
+        <Button x:Name="BtnSave" Grid.Row="4" Height="46" Margin="0,20,0,0" VerticalAlignment="Bottom" Content="Сохранить" Style="{StaticResource SuccessButtonStyle}" Click="BtnSave_Click"/>
+    </Grid>
+</Window>
